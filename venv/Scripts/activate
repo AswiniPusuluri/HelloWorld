@@ -37,7 +37,11 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
+<<<<<<< HEAD
 VIRTUAL_ENV="C:\Users\aswin\PycharmProjects\HelloWorld\venv"
+=======
+VIRTUAL_ENV="C:\Users\aswin\PycharmProjects\Assignment1\venv"
+>>>>>>> 4838e3f (Python Game Program)
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
