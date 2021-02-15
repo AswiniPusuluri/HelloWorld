@@ -80,13 +80,13 @@ def game():
         return False
 
 # "This is for Testing please comment while loop while running unit test"
-"""while True:
+while True:
     result = game()
     print(result)
     print("Do you want to play again(Y/N)")
     ans=input()
     if ans == 'n' or ans == 'N':
-        break"""
+        break
 
 
 
