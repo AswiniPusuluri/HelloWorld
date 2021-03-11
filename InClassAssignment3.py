@@ -12,25 +12,6 @@ class Pet:
          self.birthdate=birthdate
 
 
-# class Pet:
-#     def __init__(self,name):
-#         self.name=name
-#     def pet_species(self,species):
-#         self.species=species
-#     def pet_breed(self,breed):
-#         self.breed=breed
-#     def pet_color(self,color):
-#         self.color=color
-#     def pet_gender(self,gender):
-#         self.gender=gender
-#     def pet_owner(self,owner):
-#         self.owner=owner
-#     def pet_address(self,address):
-#         self.address=address
-#     def pet_birthdate(self,birthdate):
-#         self.birthdate=datetime.datetime(birthdate)
-
-
 
     def getAge(self):
         d1 = datetime.date.today()
