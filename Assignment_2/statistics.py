@@ -1,38 +1,25 @@
 # Create a Python project to perform some simple statistics on a list of values.
 # Sum:
+from functools import reduce
+
+
 def sum_(mylist):
-    total = 0
-    for i in mylist:
-        total += i
-    print(f'The sum of list  = {total}')
-    return total
+    sum = reduce(lambda x,y: x+y, mylist)
+    return sum
 
 # Mean:
 def mean_(mylist):
-    total = 0
-    for i in mylist:
-        total += i
-    avg = total / len(mylist)
+    avg = sum_(mylist) / len(mylist)
     return avg
-    print(f'The Mean  = {avg:.4f}')
 
 # Maximum:
 def max_(mylist):
-    max=0
-    for x in mylist:
-        if x > max:
-            max = x
-    print(f'The Maximum number of list  = {max}')
+    max = reduce(lambda a,b: a if a > b else b, mylist[1:], mylist[0])
     return max
 # Minimum:
 def min_(mylist):
-    min=mylist[0]
-    for x in range(len(mylist)):
-        if mylist[x] < min:
-            min = x
-    print(f'The Minimum number of list  = {min}')
+    min= reduce(lambda a,b: a if a < b else b, mylist[1:], mylist[0])
     return min
-
 
 # Median:
 def median_(mylist):
@@ -46,7 +33,6 @@ def median_(mylist):
         lowmedian= sorted_values[middle_index - 1]
         highmedian = sorted_values[middle_index]
         median = (lowmedian + highmedian) / 2
-    print(f'The Median  = {median}')
     return median
 
 # Mode:
@@ -88,6 +74,7 @@ def std(mylist):
         diff = x - mean
         sum_of_squares += diff * diff
 
+
     variance = sum_of_squares / len(mylist)
     stdev = math.sqrt(variance)
 
@@ -98,13 +85,13 @@ def std(mylist):
 
 
 mylist = [7, 9, 3, 5, 2, 8]
-sum_(mylist)
-mean_(mylist)
-max_(mylist)
-min_(mylist)
-median_(mylist)
+print("Sum of the list:{} ".format(sum_(mylist)))
+print(f'The Mean = {mean_(mylist):.2f}')
+print(f'The Maximum number of list  = {max_(mylist)}')
+print(f'The Minimum number of list  = {min_(mylist)}')
+print(f'The Median  = {median_(mylist)}')
 unimodal = modes_([4, 7, 4, 0, 3, 4, 7])
-print(f'mode for unimodal ) = {unimodal}')
+print(f'mode for unimodal  = {unimodal}')
 bimodal = modes_([5, 0, 5, 0, 3, 5, 0])
-print(f'mode for bimodal) = {bimodal}')
+print(f'mode for bimodal = {bimodal}')
 std(mylist)
