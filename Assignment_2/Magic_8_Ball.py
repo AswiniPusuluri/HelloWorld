@@ -12,6 +12,21 @@ Answers = ['It is certain', 'It is decidedly so', 'Without a doubt', 'Yes – de
            'Ask again later', 'Better not tell you now', 'Cannot predict now', 'Concentrate and ask again',
            'Dont count on it', 'My reply is no', 'My sources say no', 'Outlook not so good', 'Very doubtful']
 
+def uppercase_decorator(function):
+    def wrapper():
+        func = function()
+        make_uppercase = func.upper()
+        return make_uppercase
+    return wrapper
+
+
+@uppercase_decorator
+def welcome():
+    a='welcome to magic 8 ball game'
+    return a
+
+
+
 
 def MagicBall():
     input('Ask your question:')
@@ -30,5 +45,5 @@ def Replay():
         print('I apologise.Please repeat.')
         Replay()
 
-
+print(welcome())
 MagicBall()

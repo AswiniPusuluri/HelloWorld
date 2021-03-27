@@ -25,14 +25,14 @@ def min_(mylist):
 def median_(mylist):
 
     count = len(mylist)
-    middle_index = count // 2
+    middle = count // 2
     sorted_values = sorted(mylist)
     if count % 2 == 1:
-        median = sorted_values[middle_index]
+        median = sorted_values[middle]
     else:
-        lowmedian= sorted_values[middle_index - 1]
-        highmedian = sorted_values[middle_index]
-        median = (lowmedian + highmedian) / 2
+        low= sorted_values[middle - 1]
+        high = sorted_values[middle]
+        median = (low + high) / 2
     return median
 
 # Mode:

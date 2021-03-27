@@ -1,3 +1,17 @@
+def uppercase_decorator(function):
+    def wrapper():
+        func = function()
+        make_uppercase = func.upper()
+        return make_uppercase
+    return wrapper
+
+
+@uppercase_decorator
+def welcome():
+    return 'Welcome to Number Guess'
+
+
+
 import random
 def game_():
     user_response = input("Please input a number between 0 and 100:")
@@ -24,7 +38,7 @@ def Replay():
 
 if __name__=="__main__":
     num = random.randrange(0, 100)
-    print("Welcome to Number Guess")
+    print(welcome())
     game_()
     Replay()
 
