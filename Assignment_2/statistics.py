@@ -6,6 +6,19 @@ from functools import reduce
 def sum_(mylist):
     sum = reduce(lambda x,y: x+y, mylist)
     return sum
+# my decorator function
+def mydiv(func):
+    def inner_func(x,y):
+        print(f'Dividing {x} and {y}')
+        if y==0:
+            print("Division by zero is not possible")
+            return
+        return func(x,y)
+    return inner_func
+
+@mydiv
+def divide(a,b):
+    return a/b
 
 # Mean:
 def mean_(mylist):
@@ -95,3 +108,4 @@ print(f'mode for unimodal  = {unimodal}')
 bimodal = modes_([5, 0, 5, 0, 3, 5, 0])
 print(f'mode for bimodal = {bimodal}')
 std(mylist)
+print(divide(10,2))

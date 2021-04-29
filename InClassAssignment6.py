@@ -2,7 +2,7 @@ import time as t
 f1 = open("20k.txt")
 data_ = f1.read()
 data = data_.split('\n')
-person_list = data[900:1700]
+person_list = data[0:900]
 person_list_bubble=person_list
 person_list_quick=person_list
 person_list_selection=person_list
