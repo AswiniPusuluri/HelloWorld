@@ -1,0 +1,43 @@
+replacepatterns col: {Date of Publication} with: '' on: `"` global: true
+splitpatterns col: {Date of Publication} type: on on: ` `
+drop col: {Date of Publication2} action: Drop
+splitpatterns col: {Date of Publication1} type: on on: `{delim}`
+drop col: {Date of Publication3} action: Drop
+replacepatterns col: {Date of Publication2} with: '' on: `[` global: true
+replacepatterns col: {Date of Publication2} with: '' on: `\?]` global: true
+columnbyexample columns: {Date of Publication2} value: CASE([ISNULL({Date of Publication2}),NULL(),ISMISSING([{Date of Publication2}]),'',SUBSTRING({Date of Publication2}, 0, 4)]) exampleMappingId: 20927 as: 'Date of Publication1'
+drop col: {Date of Publication2} action: Drop
+extractpatterns type: custom col: {Place of Publication} on: `{digit}{4}`
+columnbyexample columns: {Date of Publication1} value: CASE([ISNULL({Date of Publication1}),NULL(),ISMISSING([{Date of Publication1}]),'',DATEFORMAT(PARSEDATE({Date of Publication1}, ['yyyy', 'M\/d\/yy', 'MM\/dd\/yy', 'MM-dd-yy', 'M-d-yy', 'MMM d, yyyy', 'MMMM d, yyyy', 'MMM d yyyy', 'MMMM d yyyy', 'MM-dd-yyyy', 'M-d-yyyy', 'dd\/MM\/yyyy', 'd\/M\/yyyy', 'MM\/dd\/yyyy', 'M\/d\/yyyy', 'yyyy\/M\/d', 'M\/d\/yy h:mm a', 'MM\/dd\/yy h:mm a', 'MM-dd-yy h:mm a', 'M-d-yy h:mm a', 'MMM d, yyyy h:mm:ss a', 'MM-dd-yyyy h:mm:ss a', 'M-d-yyyy h:mm:ss a', 'yyyy-MM-dd h:mm:ss a', 'yyyy-M-d h:mm:ss a', 'yyyy-MM-dd HH:mm:ss.S', 'dd\/MM\/yyyy h:mm:ss a', 'd\/M\/yyyy h:mm:ss a', 'MM\/dd\/yyyy h:mm:ss a', 'M\/d\/yyyy h:mm:ss a', 'MM\/dd\/yy h:mm:ss a', 'MM\/dd\/yy H:mm:ss', 'M\/d\/yy H:mm:ss', 'dd\/MM\/yyyy h:mm a', 'd\/M\/yyyy h:mm a', 'MM\/dd\/yyyy h:mm a', 'M\/d\/yyyy h:mm a', 'MM-dd-yy h:mm:ss a', 'M-d-yy h:mm:ss a', 'MM-dd-yyyy h:mm a', 'M-d-yyyy h:mm a', 'yyyy-MM-dd h:mm a', 'yyyy-M-d h:mm a', 'MMM.dd.yyyy', 'dd\/MMM\/yy h:mm a']), 'yyyy')]) exampleMappingId: 20928 as: 'Date of Publication2'
+drop col: {Date of Publication1} action: Drop
+merge col: {Place of Publication1},{Date of Publication2} as: 'column1'
+columnbyexample columns: column1 value: CASE([ISNULL(column1),NULL(),ISMISSING([column1]),'',DATEFORMAT(PARSEDATE(column1, ['yyyy', 'M\/d\/yy', 'MM\/dd\/yy', 'MM-dd-yy', 'M-d-yy', 'MMM d, yyyy', 'MMMM d, yyyy', 'MMM d yyyy', 'MMMM d yyyy', 'MM-dd-yyyy', 'M-d-yyyy', 'dd\/MM\/yyyy', 'd\/M\/yyyy', 'MM\/dd\/yyyy', 'M\/d\/yyyy', 'yyyy\/M\/d', 'M\/d\/yy h:mm a', 'MM\/dd\/yy h:mm a', 'MM-dd-yy h:mm a', 'M-d-yy h:mm a', 'MMM d, yyyy h:mm:ss a', 'MM-dd-yyyy h:mm:ss a', 'M-d-yyyy h:mm:ss a', 'yyyy-MM-dd h:mm:ss a', 'yyyy-M-d h:mm:ss a', 'yyyy-MM-dd HH:mm:ss.S', 'dd\/MM\/yyyy h:mm:ss a', 'd\/M\/yyyy h:mm:ss a', 'MM\/dd\/yyyy h:mm:ss a', 'M\/d\/yyyy h:mm:ss a', 'MM\/dd\/yy h:mm:ss a', 'MM\/dd\/yy H:mm:ss', 'M\/d\/yy H:mm:ss', 'dd\/MM\/yyyy h:mm a', 'd\/M\/yyyy h:mm a', 'MM\/dd\/yyyy h:mm a', 'M\/d\/yyyy h:mm a', 'MM-dd-yy h:mm:ss a', 'M-d-yy h:mm:ss a', 'MM-dd-yyyy h:mm a', 'M-d-yyyy h:mm a', 'yyyy-MM-dd h:mm a', 'yyyy-M-d h:mm a', 'MMM.dd.yyyy', 'dd\/MMM\/yy h:mm a']), 'yyyy')]) exampleMappingId: 20929 as: 'column2'
+drop col: column1 action: Drop
+drop col: {Date of Publication2} action: Drop
+drop col: {Place of Publication1} action: Drop
+columnbyexample columns: {Place of Publication} value: CASE([ISNULL({Place of Publication}),NULL(),ISMISSING([{Place of Publication}]),'',CASE([MATCHES([{Place of Publication}], /^[A-Z]+[a-z]+;+ +[A-Z]+[a-z]+ +&+ +[A-Z]+[a-z]+$/, false),SUBSTRING({Place of Publication}, 0, LEN({Place of Publication}) - LEN(SUBSTITUTE(SUBSTRING({Place of Publication}, FINDNTH({Place of Publication}, /[A-Z]([a-z])+/, 3, right, false), LEN({Place of Publication})), /[A-Z]([a-z])+/, '', false, /^/))),SUBSTRING({Place of Publication}, FINDNTH({Place of Publication}, /[A-Za-z]+([ \t\r\n][A-Za-z]+)*/, 1, right, false), LEN({Place of Publication}) - LEN(SUBSTITUTE(SUBSTRING({Place of Publication}, FINDNTH({Place of Publication}, /[A-Za-z]+([ \t\r\n][A-Za-z]+)*/, 1, right, false), LEN({Place of Publication})), /[A-Za-z]+([ \t\r\n][A-Za-z]+)*/, '', false, /^/)))])]) exampleMappingId: 20930 as: 'Place of Publication1'
+drop col: {Place of Publication} action: Drop
+drop col: {Corporate Author} action: Drop
+drop col: {Corporate Contributors} action: Drop
+replacepatterns col: {Edition Statement} with: '' on: `"` global: true
+replacepatterns col: {Edition Statement} with: '' on: `[` global: true
+splitpatterns col: {Edition Statement} type: on on: `{delim}` start: `edition` end: ` `
+drop col: {Edition Statement2} action: Drop
+splitpatterns col: {Edition Statement1} type: on on: `]`
+drop col: {Edition Statement3} action: Drop
+splitpatterns col: {Edition Statement2} type: on on: `{delim}` start: `{lower}{7}` end: `{delim}`
+drop col: {Edition Statement3} action: Drop
+textformat col: Author type: propercase
+replacepatterns col: Author with: '' on: `"` global: true
+textformat col: Contributors type: propercase
+replacepatterns col: Contributors with: '' on: `"` global: true
+drop col: {Former owner} action: Drop
+drop col: Engraver action: Drop
+splitpatterns col: Shelfmarks type: on on: '|' limit: 2
+replacepatterns col: Publisher with: '' on: `"` global: true
+replacepatterns col: Title with: '' on: `"` global: true
+replacepatterns col: Title with: '' on: `[` global: true
+rename type: manual mapping: [{Place of Publication1},'Place of Publication']
+rename type: manual mapping: [{Edition Statement1},'Edition Statement']
+rename type: manual mapping: [column2,'Date of Publication']
+drop col: Shelfmarks3 action: Drop
